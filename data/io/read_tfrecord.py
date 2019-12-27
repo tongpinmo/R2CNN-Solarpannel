@@ -23,6 +23,7 @@ def read_single_example_and_decode(filename_queue):
         serialized=serialized_example,
         features={
             'img_name': tf.FixedLenFeature([], tf.string),
+
             'img_height': tf.FixedLenFeature([], tf.int64),
             'img_width': tf.FixedLenFeature([], tf.int64),
             'img': tf.FixedLenFeature([], tf.string),
@@ -74,7 +75,7 @@ def next_batch(dataset_name, batch_size, shortside_len, is_training):
     '''
     assert batch_size == 1, "we only support batch_size is 1.We may support large batch_size in the future"
 
-    if dataset_name not in ['jyzdata', 'DOTA', 'ship', 'ICDAR2015', 'pascal', 'coco', 'DOTA_TOTAL', 'WIDER']:
+    if dataset_name not in ['jyzdata', 'DOTA', 'ship', 'ICDAR2015', 'pascal', 'coco', 'DOTA_TOTAL', 'WIDER','Solarpannel']:
         raise ValueError('dataSet name must be in pascal, coco spacenet and ship')
 
     if is_training:

@@ -149,10 +149,7 @@ def train():
     train_op = optimizer.apply_gradients(grads_and_vars=gradients,
                                          global_step=global_step)
     summary_op = tf.summary.merge_all()
-    init_op = tf.group(
-        tf.global_variables_initializer(),
-        tf.local_variables_initializer()
-    )
+    # init_op = tf.group(tf.global_variables_initializer(),tf.local_variables_initializer())
 
     restorer, restore_ckpt = faster_rcnn.get_restorer()
     saver = tf.train.Saver(max_to_keep=10)
@@ -162,7 +159,10 @@ def train():
     #
     with tf.Session(config=config) as sess:
     # with tf.Session() as sess:
-        sess.run(init_op)
+    #     init_op = tf.group(tf.global_variables_initializer(), tf.local_variables_initializer())
+    #     sess.run(init_op)
+        sess.run(tf.global_variables_initializer())
+        sess.run(tf.local_variables_initializer())
         if not restorer is None:
             restorer.restore(sess, restore_ckpt)
             print('restore model')

@@ -12,7 +12,7 @@ from help_utils.tools import *
 
 tf.app.flags.DEFINE_string('VOC_dir', '/mnt/USBC/gx/Detection/jyzdata/VOCdevkit_train/', 'Voc dir')
 tf.app.flags.DEFINE_string('xml_dir', 'Annotations', 'xml dir')
-tf.app.flags.DEFINE_string('image_dir', 'JPEGImages', 'image dir')
+tf.app.flags.DEFINE_string('image_dir', 'Cluster/01', 'image dir')
 tf.app.flags.DEFINE_string('save_name', 'train', 'save name')
 tf.app.flags.DEFINE_string('save_dir', '../tfrecord/', 'save name')
 tf.app.flags.DEFINE_string('img_format', '.jpg', 'format of image')
@@ -57,7 +57,7 @@ def read_xml_gtbox_and_label(xml_path):
             for child_item in child_of_root:
                 if child_item.tag == 'name':
                     label = NAME_LABEL_MAP[child_item.text]
-                if child_item.tag == 'bndbox':
+                if child_item.tag == 'robndbox':
                     tmp_box = []
                     for node in child_item:
                         tmp_box.append(float(node.text))
@@ -72,7 +72,9 @@ def read_xml_gtbox_and_label(xml_path):
 
 def convert_pascal_to_tfrecord():
     xml_path = FLAGS.VOC_dir + FLAGS.xml_dir
+    print('xml_path: ',xml_path)
     image_path = FLAGS.VOC_dir + FLAGS.image_dir
+    print('image_path: ',image_path)
     save_path = FLAGS.save_dir + FLAGS.dataset + '_' + FLAGS.save_name + '.tfrecord'
     mkdir(FLAGS.save_dir)
 
@@ -91,6 +93,7 @@ def convert_pascal_to_tfrecord():
             continue
 
         img_height, img_width, gtbox_label = read_xml_gtbox_and_label(xml)
+        print('gtbox_label: ',gtbox_label)
         assert gtbox_label.shape[0] > 0, 'no box'
 
         # img = np.array(Image.open(img_path))

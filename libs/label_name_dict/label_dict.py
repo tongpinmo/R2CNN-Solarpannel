@@ -8,6 +8,7 @@ if cfgs.DATASET_NAME == 'ship':
         'back_ground': 0,
         'ship': 1
     }
+
 elif cfgs.DATASET_NAME == 'aeroplane':
     NAME_LABEL_MAP = {
         'back_ground': 0,
@@ -27,6 +28,15 @@ elif cfgs.DATASET_NAME == 'jyzdata':
         'taoci': 4,
         'taoci2': 4
     }
+
+elif cfgs.DATASET_NAME == 'Solarpannel':
+    NAME_LABEL_MAP = {
+    'back_ground': 0,
+    'Cluster': 1,
+    'Crack'  : 2,
+    'String' : 3,
+}
+
 elif cfgs.DATASET_NAME == 'ICDAR2015':
     NAME_LABEL_MAP = {
         'back_ground': 0,
@@ -75,6 +85,8 @@ elif cfgs.DATASET_NAME == 'pascal':
         'train': 19,
         'tvmonitor': 20
     }
+
+
 else:
     assert 'please set label dict!'
 

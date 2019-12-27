@@ -341,7 +341,7 @@ def parse_args():
                         default=200, type=int)
     parser.add_argument('--image_ext', dest='image_ext',
                         help='image format',
-                        default='.png', type=str)
+                        default='.jpg', type=str)
     parser.add_argument('--save_res', dest='save_res',
                         help='save results',
                         default=True, type=bool)
@@ -373,7 +373,7 @@ if __name__ == "__main__":
     # inference(det_net, file_paths, args.des_folder, args.h_len, args.w_len,
     #            args.h_overlap, args.w_overlap,  args.save_res)
 
-    file_paths = get_file_paths_recursive('/root/userfolder/DOTA/test/images', '.png')
+    file_paths = get_file_paths_recursive('/root/userfolder/DOTA/test/images', '.jpg')
     det_net = build_whole_network.DetectionNetwork(base_network_name=cfgs.NET_NAME,
                                                    is_training=False)
     inference(det_net, file_paths, '/root/userfolder/yx/R2CNN_Attention/tools/demo/', 800, 800,

@@ -170,7 +170,7 @@ def parse_args():
                         default='/mnt/USBB/gx/DOTA/DOTA_clip/val/images/', type=str)
     parser.add_argument('--image_ext', dest='image_ext',
                         help='image format',
-                        default='.png', type=str)
+                        default='.jpg', type=str)
     parser.add_argument('--test_annotation_path', dest='test_annotation_path',
                         help='test annotate path',
                         default=cfgs.TEST_ANNOTATION_PATH, type=str)

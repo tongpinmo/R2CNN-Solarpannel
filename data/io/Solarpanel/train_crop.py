@@ -18,7 +18,7 @@ def save_to_xml(save_path, im_width, im_height, objects_axis, label_name):
     annotation.appendChild(folder)
 
     filename = doc.createElement('filename')
-    filename_name = doc.createTextNode('000024.png')
+    filename_name = doc.createTextNode('000024.jpg')
     filename.appendChild(filename_name)
     annotation.appendChild(filename)
 
@@ -125,8 +125,6 @@ class_list = ['plane', 'baseball-diamond', 'bridge', 'ground-track-field',
 'swimming-pool', 'helicopter']
 
 
-
-
 def format_label(txt_list):
     format_data = []
     for i in txt_list[2:]:
@@ -199,18 +197,19 @@ def clip_image(file_idx, image, boxes_all, width, height):
                     save_to_xml(xml, subImage.shape[1], subImage.shape[0], box[idx, :], class_list)
                     # print ('save xml : ', xml)
                     if subImage.shape[0] > 5 and subImage.shape[1] >5:
-                        img = os.path.join(save_dir, 'images', "%s_%04d_%04d.png" % (file_idx, top_left_row, top_left_col))
+                        img = os.path.join(save_dir, 'images', "%s_%04d_%04d.jpg" % (file_idx, top_left_row, top_left_col))
                         cv2.imwrite(img, subImage)
+        
 
 
 print ('class_list', len(class_list))
-raw_data = './raw_DOTA/'
-raw_images_dir = os.path.join(raw_data, 'images','images')
-raw_label_dir = os.path.join(raw_data, 'labelTxt-v1.0','lableTxt')
+raw_data = '/mnt/a409/SIBITU/SIBITU_Dataset/SIBITU_AI'
+raw_images_dir = os.path.join(raw_data, 'Cluster','01')
+raw_label_dir = os.path.join(raw_data, 'label','Cluster')
 
-save_dir = './DOTA_clip/train/'
+save_dir = './dataset/Solarpanel_clip_train'
 
-images = [i for i in os.listdir(raw_images_dir) if 'png' in i]
+images = [i for i in os.listdir(raw_images_dir) if 'jpg' in i]
 labels = [i for i in os.listdir(raw_label_dir) if 'txt' in i]
 
 print ('find image', len(images))
@@ -220,7 +219,7 @@ min_length = 1e10
 max_length = 1
 
 for idx, img in enumerate(images):
-# img = 'P1524.png'
+# img = 'P1524.jpg'
     print (idx, 'read image', img)
     img_data = misc.imread(os.path.join(raw_images_dir, img))
 
@@ -228,7 +227,7 @@ for idx, img in enumerate(images):
         # img_data = img_data[:, :, np.newaxis]
         # print ('find gray image')
 
-    txt_data = open(os.path.join(raw_label_dir, img.replace('png', 'txt')), 'r').readlines()
+    txt_data = open(os.path.join(raw_label_dir, img.replace('jpg', 'xml')), 'r').readlines()
     # print (idx, len(format_label(txt_data)), img_data.shape)
     # if max(img_data.shape[:2]) > max_length:
         # max_length = max(img_data.shape[:2])
@@ -238,7 +237,7 @@ for idx, img in enumerate(images):
         # print (idx, len(format_label(txt_data)), img_data.shape)
         # print (idx, 'min_length', min_length, 'max_length', max_length)
     box = format_label(txt_data)
-    clip_image(img.strip('.png'), img_data, box, 800, 800)
+    clip_image(img.strip('.jpg'), img_data, box, 800, 800)
     
     
     

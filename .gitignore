@@ -119,3 +119,9 @@ __pycache__/
 */data/pretrained_weights/*
 */data/tfrecord/*
 
+data/io/DOTA/raw_DOTA
+data/io/DOTA/DOTA_clip
+data/pretrained_weights
+data/tfrecord
+
+
