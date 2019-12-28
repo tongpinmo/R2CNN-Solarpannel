@@ -123,5 +123,6 @@ data/io/DOTA/raw_DOTA
 data/io/DOTA/DOTA_clip
 data/pretrained_weights
 data/tfrecord
+cv2_box/
 
 

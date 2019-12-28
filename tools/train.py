@@ -217,7 +217,7 @@ def train():
                 if not os.path.exists(save_dir):
                     os.makedirs(save_dir)
 
-                save_ckpt = os.path.join(save_dir, 'voc_' + str(global_stepnp) + 'model.ckpt')
+                save_ckpt = os.path.join(save_dir, 'solar_' + str(global_stepnp) + 'model.ckpt')
                 saver.save(sess, save_ckpt)
                 print(' weights had been saved')
 

@@ -28,6 +28,42 @@ def _bytes_feature(value):
     return tf.train.Feature(bytes_list=tf.train.BytesList(value=[value]))
 
 
+def calculate_rotated_xy(x1, y1, x2, y2, theta):
+    # x = (x1-x2)cos(theta) - (y1-y2)sin(theta) + x2
+    # y = (y1-y2)cos(theta) + (x1-x2)sin(theta) + y2
+
+    rotated_x = (x1 - x2) * math.cos(theta) - (y1 - y2) * math.sin(theta) + x2
+    rotated_y = (y1 - y2) * math.cos(theta) + (x1 - x2) * math.sin(theta) + y2
+
+    return rotated_x, rotated_y
+
+
+def get_rotated_xy(box_list):
+    x = box_list[0]
+    print('x: ', x)
+    y = box_list[1]
+    print('y: ', y)
+
+    w = box_list[2]
+    print('w: ', w)
+    h = box_list[3]
+    angle = box_list[4]
+    label = box_list[5]
+
+    # x,y,w,h,theta ->  x_i, y_i ( i = 1,2,3,4)
+    x1_, y1_ = x - w / 2, y - h / 2
+    x2_, y2_ = x + w / 2, y - h / 2
+    x3_, y3_ = x + w / 2, y + h / 2
+    x4_, y4_ = x - w / 2, y + h / 2
+
+    x1, y1 = calculate_rotated_xy(x1_, y1_, x, y, angle)
+    x2, y2 = calculate_rotated_xy(x2_, y2_, x, y, angle)
+    x3, y3 = calculate_rotated_xy(x3_, y3_, x, y, angle)
+    x4, y4 = calculate_rotated_xy(x4_, y4_, x, y, angle)
+
+    return [x1, y1, x2, y2, x3, y3, x4, y4, label]
+
+
 def read_xml_gtbox_and_label(xml_path):
     """
     :param xml_path: the path of voc xml
@@ -63,9 +99,15 @@ def read_xml_gtbox_and_label(xml_path):
                         tmp_box.append(float(node.text))
                     assert label is not None, 'label is none, error'
                     tmp_box.append(label)
+                    tmp_box = get_rotated_xy(tmp_box)
+                    print('tmp_box: ',tmp_box)
+
                     box_list.append(tmp_box)
 
     gtbox_label = np.array(box_list, dtype=np.int32)
+
+
+    
 
     return img_height, img_width, gtbox_label
 

@@ -17,8 +17,8 @@ print(20*"++--")
 print(ROOT_PATH)
 GPU_GROUP = "3"
 SHOW_TRAIN_INFO_INTE = 100
-SMRY_ITER = 1000
-SAVE_WEIGHTS_INTE = 20000
+SMRY_ITER = 100
+SAVE_WEIGHTS_INTE = 100
 
 SUMMARY_PATH = ROOT_PATH + '/output/summary'
 TEST_SAVE_PATH = ROOT_PATH + '/tools/test_result'
@@ -61,12 +61,12 @@ EPSILON = 1e-5
 MOMENTUM = 0.9
 LR = 0.0003  # 0.0003
 DECAY_STEP = [150000, 250000]  # [100000, 200000] Not pyramid images training
-MAX_ITERATION = 600000   # 300000 Not pyramid images training
+MAX_ITERATION = 60000   # 300000 Not pyramid images training
 
 # -------------------------------------------- Data_preprocess_config
 DATASET_NAME = 'Solarpannel'  # 'Cluster', 'Crack', 'String'
 PIXEL_MEAN = [123.68, 116.779, 103.939]  # R, G, B. In tf, channel is RGB. In openCV, channel is BGR
-IMG_SHORT_SIDE_LEN = [800, 600, 700, 900, 1000, 1100, 1200]
+IMG_SHORT_SIDE_LEN = [800, 600, 700, 900, 1000, 1100, 1200]         #FIXME:??
 IMG_MAX_LENGTH = 1000
 CLASS_NUM = 3
 
@@ -111,7 +111,7 @@ ROI_SIZE = 14
 ROI_POOL_KERNEL_SIZE = 2
 USE_DROPOUT = False
 KEEP_PROB = 1.0
-SHOW_SCORE_THRSHOLD = 0.5  # only show in tensorboard
+SHOW_SCORE_THRSHOLD = 0.00  # only show in tensorboard
 
 FAST_RCNN_H_NMS_IOU_THRESHOLD = 0.4
 FAST_RCNN_R_NMS_IOU_THRESHOLD = 0.1
