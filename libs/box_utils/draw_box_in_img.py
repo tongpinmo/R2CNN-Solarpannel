@@ -136,27 +136,36 @@ def draw_box_cv(img, boxes, labels, scores):
             num_of_object += 1
             # color = (np.random.randint(255), np.random.randint(255), np.random.randint(255))
             color = (0, 255, 0)
-            cv2.rectangle(img,
-                          pt1=(xmin, ymin),
-                          pt2=(xmax, ymax),
-                          color=color,
-                          thickness=2)
+            # cv2.rectangle(img,
+            #               pt1=(xmin, ymin),
+            #               pt2=(xmax, ymax),
+            #               color=color,
+            #               thickness=2)
 
             category = LABEL_NAME_MAP[label]
 
             # if scores is not None:
-            #     cv2.rectangle(img,
-            #                   pt1=(xmin, ymin),
-            #                   pt2=(xmin+150, ymin+15),
-            #                   color=color,
-            #                   thickness=-1)
-            #     cv2.putText(img,
-            #                 text=category+": "+str(scores[i]),
-            #                 org=(xmin, ymin+10),
-            #                 fontFace=1,
-            #                 fontScale=1,
-            #                 thickness=2,
-            #                 color=(color[1], color[2], color[0]))
+            if scores[i] > 0.1:
+
+                cv2.rectangle(img,
+                              pt1=(xmin, ymin),
+                              pt2=(xmax, ymax),
+                              color=color,
+                              thickness=2)
+
+                print('scores: ',scores[i])
+                cv2.rectangle(img,
+                              pt1=(xmin, ymin),
+                              pt2=(xmin+150, ymin+15),
+                              color=color,
+                              thickness=-1)
+                cv2.putText(img,
+                            text=category+": "+str(scores[i]),
+                            org=(xmin, ymin+10),
+                            fontFace=1,
+                            fontScale=1,
+                            thickness=1,
+                            color=(color[0], color[2], color[1]))
             # else:
             #     cv2.rectangle(img,
             #                   pt1=(xmin, ymin),
@@ -170,12 +179,12 @@ def draw_box_cv(img, boxes, labels, scores):
             #                 fontScale=1,
             #                 thickness=2,
             #                 color=(color[1], color[2], color[0]))
-    cv2.putText(img,
-                text=str(num_of_object),
-                org=((img.shape[1]) // 2, (img.shape[0]) // 2),
-                fontFace=3,
-                fontScale=1,
-                color=(255, 0, 0))
+    # cv2.putText(img,
+    #             text=str(num_of_object),
+    #             org=((img.shape[1]) // 2, (img.shape[0]) // 2),
+    #             fontFace=3,
+    #             fontScale=1,
+    #             color=(255, 0, 0))
     return img
 
 
@@ -195,26 +204,33 @@ def draw_rotate_box_cv(img, boxes, labels, scores):
             num_of_object += 1
             # color = (np.random.randint(255), np.random.randint(255), np.random.randint(255))
             color = (0, 255, 0)
-            rect = ((x_c, y_c), (w, h), theta)
-            rect = cv2.boxPoints(rect)
-            rect = np.int0(rect)
-            cv2.drawContours(img, [rect], -1, color, 2)
+            # rect = ((x_c, y_c), (w, h), theta)
+            # rect = cv2.boxPoints(rect)
+            # rect = np.int0(rect)
+            # cv2.drawContours(img, [rect], -1, color, 2)
 
             category = LABEL_NAME_MAP[label]
 
             # if scores is not None:
-            #     cv2.rectangle(img,
-            #                   pt1=(x_c, y_c),
-            #                   pt2=(x_c + 120, y_c + 15),
-            #                   color=color,
-            #                   thickness=-1)
-            #     cv2.putText(img,
-            #                 text=category+": "+str(scores[i]),
-            #                 org=(x_c, y_c+10),
-            #                 fontFace=1,
-            #                 fontScale=1,
-            #                 thickness=2,
-            #                 color=(color[1], color[2], color[0]))
+            if scores[i] > 0.1 :
+
+                rect = ((x_c, y_c), (w, h), theta)
+                rect = cv2.boxPoints(rect)
+                rect = np.int0(rect)
+                cv2.drawContours(img, [rect], -1, color, 2)
+
+                cv2.rectangle(img,
+                              pt1=(x_c, y_c),
+                              pt2=(x_c + 120, y_c + 15),
+                              color=color,
+                              thickness=-1)
+                cv2.putText(img,
+                            text=category+": "+str(scores[i]),
+                            org=(x_c, y_c+10),
+                            fontFace=1,
+                            fontScale=1,
+                            thickness=1,
+                            color=(color[0], color[2], color[1]))
             # else:
             #     cv2.rectangle(img,
             #                   pt1=(x_c, y_c),
@@ -228,12 +244,12 @@ def draw_rotate_box_cv(img, boxes, labels, scores):
             #                 fontScale=1,
             #                 thickness=2,
             #                 color=(color[1], color[2], color[0]))
-    cv2.putText(img,
-                text=str(num_of_object),
-                org=((img.shape[1]) // 2, (img.shape[0]) // 2),
-                fontFace=3,
-                fontScale=1,
-                color=(255, 0, 0))
+    # cv2.putText(img,
+    #             text=str(num_of_object),
+    #             org=((img.shape[1]) // 2, (img.shape[0]) // 2),
+    #             fontFace=3,
+    #             fontScale=1,
+    #             color=(255, 0, 0))
     return img
 
 
