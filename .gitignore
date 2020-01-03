@@ -124,5 +124,7 @@ data/io/DOTA/DOTA_clip
 data/pretrained_weights
 data/tfrecord
 cv2_box/
-
+data/tfrecord_version1/
+output/
+tools/inference_results/
 

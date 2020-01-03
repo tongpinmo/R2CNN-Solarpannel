@@ -104,7 +104,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description='Train a Fast R-CNN network')
     parser.add_argument('--data_dir', dest='data_dir',
                         help='data path',
-                        default='/mnt/USBC/gx/Detection/icdar2015/ch4_test_images/', type=str)
+                        default='/mnt/a409/SIBITU/SIBITU_Dataset/SIBITU_AI/train-solarpannel/images', type=str)
 
     if len(sys.argv) == 1:
         parser.print_help()

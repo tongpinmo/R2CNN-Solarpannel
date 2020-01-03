@@ -8,7 +8,7 @@ Attention + BUS + pyramid
 """
 
 # ------------------------------------------------
-VERSION = 'R2CNN_20191225_Solar_v1'
+VERSION = 'R2CNN_20191225_Solar_v3'
 NET_NAME = 'resnet_v1_101'
 ADD_BOX_IN_TENSORBOARD = True
 # ---------------------------------------- System_config
@@ -16,7 +16,7 @@ ROOT_PATH = os.path.abspath('../')
 print(20*"++--")
 print(ROOT_PATH)
 GPU_GROUP = "3"
-SHOW_TRAIN_INFO_INTE = 100
+SHOW_TRAIN_INFO_INTE = 50
 SMRY_ITER = 100
 SAVE_WEIGHTS_INTE = 100
 
@@ -61,7 +61,7 @@ EPSILON = 1e-5
 MOMENTUM = 0.9
 LR = 0.0003  # 0.0003
 DECAY_STEP = [150000, 250000]  # [100000, 200000] Not pyramid images training
-MAX_ITERATION = 60000   # 300000 Not pyramid images training
+MAX_ITERATION = 600000   # 300000 Not pyramid images training
 
 # -------------------------------------------- Data_preprocess_config
 DATASET_NAME = 'Solarpannel'  # 'Cluster', 'Crack', 'String'
@@ -80,9 +80,14 @@ WEIGHT_DECAY = 0.0001
 # ---------------------------------------------Anchor config
 BASE_ANCHOR_SIZE_LIST = [256]  # can be modified
 ANCHOR_STRIDE = [8]  # can not be modified in most situations
-ANCHOR_SCALES = [0.0625, 0.125, 0.25, 0.5, 1., 2.0]  # [4, 8, 16, 32]
+# ANCHOR_SCALES = [0.0625, 0.125, 0.25, 0.5, 1., 2.0]  # [4, 8, 16, 32]
+# ANCHOR_RATIOS = [1, 1 / 2, 2., 1 / 3., 3., 5., 1 / 4., 4., 1 / 5., 6., 1 / 6., 7., 1 / 7., 9., 1 / 9.]
+# ROI_SCALE_FACTORS = [10., 10., 5.0, 5.0, 10.0]
+
+ANCHOR_SCALES = [0.0625, 0.125]  # [4, 8, 16, 32]
 ANCHOR_RATIOS = [1, 1 / 2, 2., 1 / 3., 3., 5., 1 / 4., 4., 1 / 5., 6., 1 / 6., 7., 1 / 7., 9., 1 / 9.]
 ROI_SCALE_FACTORS = [10., 10., 5.0, 5.0, 10.0]
+
 ANCHOR_SCALE_FACTORS = None
 
 
@@ -113,9 +118,9 @@ USE_DROPOUT = False
 KEEP_PROB = 1.0
 SHOW_SCORE_THRSHOLD = 0.00  # only show in tensorboard
 
-FAST_RCNN_H_NMS_IOU_THRESHOLD = 0.4
+FAST_RCNN_H_NMS_IOU_THRESHOLD = 0.1
 FAST_RCNN_R_NMS_IOU_THRESHOLD = 0.1
-FAST_RCNN_NMS_MAX_BOXES_PER_CLASS = 150
+FAST_RCNN_NMS_MAX_BOXES_PER_CLASS = 15
 FAST_RCNN_IOU_POSITIVE_THRESHOLD = 0.4
 FAST_RCNN_IOU_NEGATIVE_THRESHOLD = 0.0   # 0.1 < IOU < 0.5 is negative
 FAST_RCNN_MINIBATCH_SIZE = 512  # if is -1, that is train with OHEM

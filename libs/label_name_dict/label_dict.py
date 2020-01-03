@@ -33,7 +33,7 @@ elif cfgs.DATASET_NAME == 'Solarpannel':
     NAME_LABEL_MAP = {
     'back_ground': 0,
     'Cluster': 1,
-    'Crack'  : 2,
+    'crack'  : 2,
     'String' : 3,
 }
 

@@ -1,1 +1,1 @@
-python2 convert_data_to_tfrecord.py --VOC_dir='/mnt/a409/SIBITU/SIBITU_Dataset/SIBITU_AI/' --xml_dir='label/Cluster' --image_dir='Cluster/01' --save_name='train' --img_format='.jpg' --dataset='Solarpannel'
+python2 convert_data_to_tfrecord.py --VOC_dir='/mnt/a409/SIBITU/SIBITU_Dataset/SIBITU_AI/train-solarpannel/' --xml_dir='annotation' --image_dir='images' --save_name='train' --img_format='.jpg' --dataset='Solarpannel'

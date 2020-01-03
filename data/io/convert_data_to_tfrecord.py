@@ -12,11 +12,11 @@ from help_utils.tools import *
 
 tf.app.flags.DEFINE_string('VOC_dir', '/mnt/USBC/gx/Detection/jyzdata/VOCdevkit_train/', 'Voc dir')
 tf.app.flags.DEFINE_string('xml_dir', 'Annotations', 'xml dir')
-tf.app.flags.DEFINE_string('image_dir', 'Cluster/01', 'image dir')
+tf.app.flags.DEFINE_string('image_dir', 'images', 'image dir')
 tf.app.flags.DEFINE_string('save_name', 'train', 'save name')
 tf.app.flags.DEFINE_string('save_dir', '../tfrecord/', 'save name')
 tf.app.flags.DEFINE_string('img_format', '.jpg', 'format of image')
-tf.app.flags.DEFINE_string('dataset', 'jyzdata', 'dataset')
+tf.app.flags.DEFINE_string('dataset', 'solardata', 'dataset')
 FLAGS = tf.app.flags.FLAGS
 
 
@@ -128,7 +128,9 @@ def convert_pascal_to_tfrecord():
         xml = xml.replace('\\', '/')
 
         img_name = xml.split('/')[-1].split('.')[0] + FLAGS.img_format
+        print('img_name: ',img_name)
         img_path = image_path + '/' + img_name
+        print('img_path: ',img_path)
 
         if not os.path.exists(img_path):
             print('{} is not exist!'.format(img_path))
